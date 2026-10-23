@@ -1,0 +1,25 @@
+# Trained profiles are ~100+ MB each (over GitHub's 100 MB per-file limit). Regenerate with train.py.
+models/*.npz
+
+# Dataset (MVTec AD is non-commercial licensed; do not redistribute)
+data/
+MVTEC/
+
+# Outputs
+results/
+storage/
+heatmap*.png
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+
+# Node
+node_modules/
+dist/
+
+# Env and editor
+.env
+.vscode/

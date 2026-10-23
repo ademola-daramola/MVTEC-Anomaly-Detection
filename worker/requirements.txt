@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+bullmq
+redis
+numpy
+scipy
+scikit-learn
+opencv-python-headless
+pillow

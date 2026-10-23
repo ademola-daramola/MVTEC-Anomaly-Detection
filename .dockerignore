@@ -1,0 +1,12 @@
+.git
+models
+data
+MVTEC
+results
+storage
+heatmap*.png
+**/__pycache__
+**/node_modules
+api/dist
+*.ipynb
+docs

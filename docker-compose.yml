@@ -1,0 +1,41 @@
+services:
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: ./api
+    ports:
+      - "3001:3000"      # the only published port (host 3001 -> container 3000)
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      STORAGE_DIR: /storage
+    volumes:
+      - storage:/storage
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    environment:
+      REDIS_URL: redis://redis:6379
+      MODELS_DIR: /models
+      STORAGE_DIR: /storage
+    volumes:
+      - storage:/storage
+      - ./models:/models:ro   # output of train.py (models/*.npz)
+    depends_on:
+      redis:
+        condition: service_healthy
+    # No published port: /health and /metrics stay inside the Compose network.
+
+volumes:
+  storage:
