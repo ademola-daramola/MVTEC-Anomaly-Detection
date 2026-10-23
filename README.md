@@ -1,1 +1,0 @@
-# MVTEC-Anomaly-Detection
